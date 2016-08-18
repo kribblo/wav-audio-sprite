@@ -1,0 +1,7 @@
+{
+    "loopfunc": true,
+    "esversion": 6,
+    "globalstrict": true,
+    "node": true,
+    "quotmark": "single"
+}
