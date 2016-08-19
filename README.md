@@ -59,6 +59,8 @@ Barely more than an example, but outputs audiosprite and json in [Howler.js form
 
     howler-sprite --path build --name mysprite *.wav
 
+Add `-q` or `--quiet` to silence the output.
+
 **audio-sprite.json:**
 
 ```json

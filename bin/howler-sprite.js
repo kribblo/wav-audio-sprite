@@ -15,18 +15,25 @@ const argv = require('minimist')(
 );
 
 if(argv.h || argv.help || argv._.length === 0) {
-    console.log('   usage: [--path=. --name=audiosprite] files...');
+    console.log('   usage: [--path=.] [--name=audiosprite] [-q|--quiet] files...');
     process.exit(0);
 }
 
+const quiet = argv.q || argv.quiet;
+
 wavAudioSprite(argv._, (buffer, timings) => {
-    const directory = argv.path || process.cwd();
-    mkpath.sync(directory);
+
+    const outputPath = argv.path || process.cwd();
+    mkpath.sync(outputPath);
 
     const name = argv.name || 'audio-sprite';
 
-    const wav = path.join(directory, `${name}.wav`);
-    const json = path.join(directory, `${name}.json`);
+    if(!quiet) {
+        console.log(`Combined ${Object.keys(timings).length} sounds into ${name}.wav:`);
+    }
+
+    const wav = path.join(outputPath, `${name}.wav`);
+    const json = path.join(outputPath, `${name}.json`);
 
     const howler = {
         src: [`${name}.wav`],
@@ -35,7 +42,18 @@ wavAudioSprite(argv._, (buffer, timings) => {
 
     for (let timing in timings) {
         const sprite = path.basename(timing, '.wav');
-        howler.sprite[sprite] = [Math.round(timings[timing].start), Math.round(timings[timing].end)];
+
+        const information = timings[timing];
+
+        if(!quiet) {
+            const seconds = (information.duration / 1000).toFixed(2);
+            console.log(`  ${sprite}: ${seconds}s`);
+        }
+
+        const start = Math.round(information.start);
+        const end = Math.round(information.end);
+
+        howler.sprite[sprite] = [start, end];
     }
 
     fs.writeFileSync(wav, buffer);
