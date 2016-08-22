@@ -32,13 +32,13 @@ wavAudioSprite(['sound-a.wav', 'sound-b.wav'], (buffer, timings) => {
 {
   "sound-a.wav": {
     "start": 0,
-    "end": 29.53873015873016,
-    "duration": 29.53873015873016
+    "end": 29538.73015873016,
+    "duration": 29538.73015873016
   },
   "sound-b.wav": {
-    "start": 29540,
-    "end": 88.6,
-    "duration": 57.6
+    "start": 31000,
+    "end": 88600.23,
+    "duration": 57600.23
   }
 }
 ```
@@ -69,14 +69,8 @@ Add `-q` or `--quiet` to silence the output.
     "audio-sprite.wav"
   ],
   "sprite": {
-    "sound-a": [
-      0,
-      29538
-    ],
-    "sound-b": [
-      31000,
-      88600
-    ]
+    "sound-a": [0, 29538],
+    "sound-b": [31000, 88600]
   }
 }
 ```
