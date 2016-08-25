@@ -45,15 +45,15 @@ wavAudioSprite(argv._, (buffer, timings) => {
 
         const information = timings[timing];
 
+        const start = Math.round(information.start);
+        const duration = Math.round(information.duration);
+
         if(!quiet) {
-            const seconds = (information.duration / 1000).toFixed(2);
+            const seconds = (duration / 1000).toFixed(2);
             console.log(`  ${sprite}: ${seconds}s`);
         }
 
-        const start = Math.round(information.start);
-        const end = Math.round(information.end);
-
-        howler.sprite[sprite] = [start, end];
+        howler.sprite[sprite] = [start, duration];
     }
 
     fs.writeFileSync(wav, buffer);
