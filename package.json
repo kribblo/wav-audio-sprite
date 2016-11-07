@@ -20,7 +20,7 @@
   "dependencies": {
     "minimist": "^1.2.0",
     "mkpath": "^1.0.0",
-    "node-wav": "0.0.1"
+    "node-wav": "0.0.2"
   },
   "bin": {
     "howler-sprite": "bin/howler-sprite.js"
