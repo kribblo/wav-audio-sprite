@@ -1,6 +1,6 @@
 {
   "name": "wav-audio-sprite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Concatenate WAV files and pads with silence to whole seconds, for use in audio sprites.",
   "main": "lib/wav-audio-sprite.js",
   "scripts": {
