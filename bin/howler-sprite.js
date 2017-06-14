@@ -21,42 +21,42 @@ if(argv.h || argv.help || argv._.length === 0) {
 
 const quiet = argv.q || argv.quiet;
 
-wavAudioSprite(argv._, (buffer, timings) => {
+wavAudioSprite(argv._)
+    .then((buffer, timings) => {
+        const outputPath = argv.path || process.cwd();
+        mkpath.sync(outputPath);
 
-    const outputPath = argv.path || process.cwd();
-    mkpath.sync(outputPath);
-
-    const name = argv.name || 'audio-sprite';
-
-    if(!quiet) {
-        console.log(`Combined ${Object.keys(timings).length} sounds into ${name}.wav:`);
-    }
-
-    const wav = path.join(outputPath, `${name}.wav`);
-    const json = path.join(outputPath, `${name}.json`);
-
-    const howler = {
-        src: [`${name}.wav`],
-        sprite: {}
-    };
-
-    for (let timing in timings) {
-        const sprite = path.basename(timing, '.wav');
-
-        const information = timings[timing];
-
-        const start = Math.round(information.start);
-        const duration = Math.round(information.duration);
+        const name = argv.name || 'audio-sprite';
 
         if(!quiet) {
-            const seconds = (duration / 1000).toFixed(2);
-            console.log(`  ${sprite}: ${seconds}s`);
+            console.log(`Combined ${Object.keys(timings).length} sounds into ${name}.wav:`);
         }
 
-        howler.sprite[sprite] = [start, duration];
-    }
+        const wav = path.join(outputPath, `${name}.wav`);
+        const json = path.join(outputPath, `${name}.json`);
 
-    fs.writeFileSync(wav, buffer);
-    fs.writeFileSync(json, JSON.stringify(howler, null, 2), 'UTF-8');
-});
+        const howler = {
+            src: [`${name}.wav`],
+            sprite: {}
+        };
+
+        for(let timing in timings) {
+            const sprite = path.basename(timing, '.wav');
+
+            const information = timings[timing];
+
+            const start = Math.round(information.start);
+            const duration = Math.round(information.duration);
+
+            if(!quiet) {
+                const seconds = (duration / 1000).toFixed(2);
+                console.log(`  ${sprite}: ${seconds}s`);
+            }
+
+            howler.sprite[sprite] = [start, duration];
+        }
+
+        fs.writeFileSync(wav, buffer);
+        fs.writeFileSync(json, JSON.stringify(howler, null, 2), 'UTF-8');
+    });
 
