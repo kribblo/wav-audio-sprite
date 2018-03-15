@@ -10,7 +10,7 @@ Only concatenates and pads + records information for use by a suitable player la
  
 Use the WAVs during development and do final conversion for release builds in a separate part of the tool-chain - or even manually by the sound guy to get the most out of desktop/mobile and different formats.
 
-Padding is *at minimum* one second silence between each sample.
+Padding is by default *at minimum* one second silence between each sample, but if `options.padding` is set in milliseconds, that gap will be used instead, without aligning to each whole second.
 
 ## API usage
 
@@ -20,7 +20,11 @@ Padding is *at minimum* one second silence between each sample.
 
 const wavAudioSprite = require('wav-audio-sprite');
 
-wavAudioSprite(['sound-a.wav', 'sound-b.wav'])
+const files = ['sound-a.wav', 'sound-b.wav'];
+const options = {
+    padding: 200
+};
+wavAudioSprite(files, options)
     .then(result => {
         const {buffer, timings} = result;
         saveAudioSprite(buffer);
