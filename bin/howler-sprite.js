@@ -22,7 +22,8 @@ if(argv.h || argv.help || argv._.length === 0) {
 const quiet = argv.q || argv.quiet;
 
 wavAudioSprite(argv._)
-    .then((buffer, timings) => {
+    .then(result => {
+        const {buffer, timings} = result;
         const outputPath = argv.path || process.cwd();
         mkpath.sync(outputPath);
 

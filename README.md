@@ -21,7 +21,8 @@ Padding is *at minimum* one second silence between each sample.
 const wavAudioSprite = require('wav-audio-sprite');
 
 wavAudioSprite(['sound-a.wav', 'sound-b.wav'])
-    .then((buffer, timings) => {
+    .then(result => {
+        const {buffer, timings} = result;
         saveAudioSprite(buffer);
         postProcessTimings(timings);
     })
