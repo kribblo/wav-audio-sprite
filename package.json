@@ -1,6 +1,6 @@
 {
   "name": "wav-audio-sprite",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Concatenate WAV files and pads with silence to whole seconds, for use in audio sprites.",
   "main": "lib/wav-audio-sprite.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "howler-sprite": "bin/howler-sprite.js"
   },
   "devDependencies": {
-    "eslint": "^4.18.2"
+    "eslint": "^5.7.0"
   },
   "repository": {
     "type": "git",
