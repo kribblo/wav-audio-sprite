@@ -4,6 +4,8 @@ Concatenate WAV files and pads with silence to whole seconds, for use in audio s
 
 Meant to be instantly useful during development and later part of a larger tool-chain.
 
+This process is really fast, compared to also encoding to a compressed format, which makes it extra suitable for local development.
+
 ## Notes on usage
 
 Only concatenates and pads + records information for use by a suitable player later. Does *not* convert to MP3, OGG, or other format. As such, there are no external dependencies such as FFMEPG or SOX that can sometimes trip up people. It is also very fast, so during development, you can do this on the fly for every request.
